@@ -14,6 +14,20 @@ public class Client {
     @OneToOne
     private Account account;
 
+    public Client(int id, String name, Account account) {
+        this.id = id;
+        this.name = name;
+        this.account = account;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
     public int getId() {
         return id;
     }

@@ -7,4 +7,6 @@ import java.util.Optional;
 
 public interface AccountService {
     public Optional<Account> findById(Integer id);
+    public Account withDraw(Integer id, Integer amount);
+    public Account deposit(Integer id, Integer amount);
 }

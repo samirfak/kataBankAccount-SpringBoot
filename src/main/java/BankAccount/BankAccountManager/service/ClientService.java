@@ -7,5 +7,6 @@ import java.util.Optional;
 
 public interface ClientService {
     public Optional<Client> findById(Integer id);
-    public boolean withDraw(Integer amount);
+    public Client withDraw(Integer idClient, Integer amount);
+    public Client deposit(Integer idClient, Integer amount);
 }
