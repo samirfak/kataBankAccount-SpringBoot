@@ -26,22 +26,14 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public Client withDraw(Integer idClient, Integer amount) {
-        Optional<Client> clientOpt = clientRepository.findById(idClient);
-        if (clientOpt.isEmpty()) {
-            throw new RuntimeException();
-        }
-        Client client = clientOpt.get();
+        Client client = clientRepository.findById(idClient).orElseThrow(IllegalArgumentException::new);
         Account account = accountService.withDraw(client.getAccount().getId(), amount) ;
         return clientRepository.findByAccount(account);
     }
 
     @Override
     public Client deposit(Integer idClient, Integer amount) {
-        Optional<Client> clientOpt = clientRepository.findById(idClient);
-        if (clientOpt.isEmpty()) {
-            throw new RuntimeException();
-        }
-        Client client = clientOpt.get();
+        Client client = clientRepository.findById(idClient).orElseThrow(IllegalArgumentException::new);
         Account account = accountService.deposit(client.getAccount().getId(), amount) ;
         return clientRepository.findByAccount(account);
     }

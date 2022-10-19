@@ -21,7 +21,7 @@ public class AccountServiceImpl implements AccountService{
 
     @Override
     public Account withDraw(Integer id, Integer amount) {
-        Account account = accountRepository.findById(id).get();
+        Account account = accountRepository.findById(id).orElseThrow(IllegalArgumentException::new);
         int balance = account.getBalance();
         if (balance < amount) {
             throw new RuntimeException();
@@ -33,7 +33,10 @@ public class AccountServiceImpl implements AccountService{
 
     @Override
     public Account deposit(Integer id, Integer amount) {
-        Account account = accountRepository.findById(id).get();
+        if (amount <= 0) {
+            throw new RuntimeException();
+        }
+        Account account = accountRepository.findById(id).orElseThrow(IllegalArgumentException::new);
         int balance = account.getBalance();
         int newBalance = balance + amount;
         account.setBalance(newBalance);
